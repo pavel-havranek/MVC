@@ -1,0 +1,11 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-white text-center bg-secondary p-3 border-dark align-content-center">
+<h1 >@Model</h1>
+@if (User?.Identity?.IsAuthenticated ?? false) {
+        <a asp-controller="Account" asp-action="Logout" class="btn btn-dark">Logout</a>
+}
+@*@Model*@
+</div>

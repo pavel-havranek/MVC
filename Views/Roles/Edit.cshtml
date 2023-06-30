@@ -1,0 +1,43 @@
+﻿@model RoleEdit
+<div class="text-white text-center bg-secondary p-3 border-dark align-content-center">
+<h1 class=" text-white">Edit Role</h1>
+<a asp-action="Index" class="btn btn-primary">Back</a>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form method="post">
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <input type="hidden" name="roleId" value="@Model.Role.Id" />
+    <h2 class=" p-1 text-white">Add To @Model.Role.Name</h2>
+    <table class="table table-bordered table-sm">
+        @if (Model.NonMembers.Count() == 0) {
+            <tr><td colspan="2">All Users Are Members</td></tr>
+        }
+        else {
+            @foreach (AppUser user in Model.NonMembers) {
+                <tr class="text-white">
+                    <td>@user.UserName</td>
+                    <td>
+                        <input type="checkbox" name="AddIds" value="@user.Id">
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <h2 class=" p-1 text-white">Remove From @Model.Role.Name</h2>
+    <table class="table table-bordered table-sm">
+        @if (Model.Members.Count() == 0) {
+            <tr><td colspan="2">No Users Are Members</td></tr>
+        }
+        else {
+            @foreach (AppUser user in Model.Members) {
+                <tr class="text-white">
+                    <td>@user.UserName</td>
+                    <td>
+                        <input type="checkbox" name="DeleteIds" value="@user.Id">
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+        <button type="submit" class="btn btn-success">Save</button>
+</form>
+</div>
